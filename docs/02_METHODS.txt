@@ -1,0 +1,35 @@
+3. METHODS
+
+3.1 Datasets
+
+We evaluated three classical machine learning models on four publicly available tabular datasets from healthcare and finance domains.
+
+The Heart Disease dataset contains 303 patient records with 13 clinical features (age, sex, chest pain type, resting blood pressure, cholesterol, etc.) for predicting presence of heart disease. The dataset has balanced classes with approximately 50% positive cases.
+
+The Credit Card Default dataset consists of 30,000 samples with 23 features describing customer payment history, credit limits, and demographics. The target variable indicates whether a customer defaulted on their credit card payment.
+
+The German Credit dataset includes 999 applicants with 24 features describing financial status and credit history. The classification task is to predict credit risk (good or bad credit).
+
+The Insurance Claims dataset contains 1,338 policyholders with 6 features including age, region, coverage type, and medical history. The target is binary claim occurrence.
+
+3.2 Data Preprocessing
+
+All datasets underwent identical preprocessing steps to ensure fair comparison. Missing values in numerical features were imputed using median values. Categorical features were encoded using label encoding, converting categories to integer representations. All features were then standardized using StandardScaler to have zero mean and unit variance.
+
+3.3 Models
+
+We compared three classical machine learning approaches:
+
+Logistic Regression serves as our baseline linear model, using L2 regularization and the lbfgs solver with a maximum of 1000 iterations.
+
+Random Forest is an ensemble method that builds 100 decision trees with bootstrap sampling. Each tree uses sqrt(n_features) random features at each split.
+
+XGBoost is a gradient boosting implementation using 100 boosting rounds with a learning rate of 0.1 and maximum tree depth of 3.
+
+All models used default scikit-learn parameters except where specified, with random_state=42 for reproducibility.
+
+3.4 Evaluation Protocol
+
+Each dataset was split into 80% training and 20% testing sets using stratified sampling to preserve class distributions. Models were trained on the training set and evaluated on the held-out test set.
+
+We report three metrics: Accuracy (overall correctness), F1 Score (harmonic mean of precision and recall), and ROC-AUC (area under the receiver operating characteristic curve). These metrics provide complementary views of model performance, especially for imbalanced datasets.

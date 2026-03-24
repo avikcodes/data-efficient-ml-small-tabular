@@ -1,0 +1,61 @@
+RELATED WORK
+
+Over the past few years machine learning (ML) algorithm comparison research has been an area of 
+growing interest among researchers. In their paper, Ahmed et al. [12] empirically evaluated ML 
+models intending to compare algorithms utilized for time series forecasting; it was determined that 
+there is not one algorithm that performs superbly outperforming all others across all datasets. 
+Similarly, Pirooznia et al. [13] contrasted the performance of various methods that work with 
+microarray data, discovering that both algorithm performance and rank differ with respect to 
+datase characteristics. Uddin et al. [14] presented a comparison of various supervised learning 
+algorithms designed for disease prediction, concluding that simpler approaches sometimes yield 
+accuracy comparable to more complex algorithms, especially when data are limited.
+
+Recent literature has also begun to target the unique challenges faced when working with small 
+datasets. Based on their analysis of the performance of random forests on randomly sampled small 
+datasets consisting of two-phase sampling, Han et al. [1] determined that new approaches need to be 
+adopted if predictions created from these datasets are to avoid being overfit to the training data. 
+In their work, Cha et al. [3] implemented a random forest-based predictive model trained using a 
+small demolition waste database which had 784 samples and highlighted the need for thoroughly 
+hyperparameter tuning of tree-based predictive models created from small sample datasets as a 
+necessary requirement for accurate prediction in this instance.
+
+Through their research, Probst et al. [2] contributed substantially to the understanding of random 
+forest hyperparameters, providing guidance on how to appropriately select hyperparameters for use 
+with random forests. Findings from their work indicate that in instances where datasets are small, 
+hyperparameter settings that refer to the random forest's default hyperparameters produce the least 
+amount of model accuracy. Furthermore, Probst and Boulesteix [4] focused on a specific hyperparameter setting, tree count for random forests, concluding that tree count does not detrimentally affect performance (i.e., predictive accuracy) but rather adds additional computation time without substantially improving performance relative to significantly increasing the time required to create the predictive model and all while utilizing small sample datasets.
+For classification, tabular data continues to utilize logistic regression extensively; Tranmer & 
+Elliot [5] conducted seminal research surrounding binary logistic regression used with survey data. 
+Gilbert [6] published a study on tabular data through logistic regression that included a key 
+strength of logistic models - easy interpretation as compared to "black box" types of models. 
+Morgan & Teachman [7] provided comparisons presenting strong support to use logistic regression to 
+classify structured data where a linearity assumption was reasonably made regarding relationships 
+in data.
+
+Many researchers have examined overfitting and ensemble methods. Kumar et al. [8] completed an 
+exhaustive survey of ensemble methods and identified that overfitting was a major challenge with 
+the small dataset sizes they identified within their research. Dietterich [9] contributed to the 
+founding work on ensemble methods in 2000, where he emphasized the importance of base learner 
+diversity for avoiding overfitting when training an ensemble. Pourtaheri & Zahiri [10] proposed 
+improvements to techniques for reducing overfitting when price datasets are used. Cunningham [11]
+studied ensemble classification schemes regarding overfitting; determining feature selection could 
+help, but not entirely resolve the problem for very small datasets.
+
+XGBoost has increased its presence as an applied machine learning method. Chen & Guestrin [16], 
+introduced XGBoost with a reference implement that demonstrated the usefulness of XGBoost for 
+classifying data on large scale datasets. Zhang et al. applied XGBoost to wind turbine fault 
+detection where they were able to obtain a high degree of accuracy. However, the vast majority of 
+studies conducted with respect to XGBoost focus on datasets that have thousands or millions of 
+observations.
+Comparison studies across several domains have not produced consistent findings; for example, 
+Khondoker et al. used ML techniques on mental health data but observed no single ML method to be 
+superior overall to others, while Onan et al. obtained positive results using ensemble methods 
+within textual classification applications using data sets of much larger size than ours.
+
+Also notable is that much of the previous research has either been performed using either 
+large-scale data sets OR within a single-domain context, while there has been little to no 
+work which has systematically compared performance between logistic regression, random forest, 
+and XGBoost using small tabular data (<1500 samples) across multiple domains. This research fills 
+an important gap in the current literature through the evaluation of all three techniques using 
+four data sets with sample sizes ranging from 303 to 30,000, representing both the healthcare and 
+finance industries.

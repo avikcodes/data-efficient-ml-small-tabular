@@ -1,0 +1,39 @@
+4. RESULTS
+
+Table 1 presents the performance of all three models across the four datasets.
+
+TABLE 1: Model Performance Across Datasets
+
+Accuracy:
+                    Credit Card  German Credit  Heart Disease  Insurance
+Logistic Regression      0.8078         0.7250         0.5574     0.9104
+Random Forest            0.8120         0.7650         0.5246     0.9440
+XGBoost                  0.8118         0.7400         0.4754     0.9328
+
+F1 Score:
+                    Credit Card  German Credit  Heart Disease  Insurance
+Logistic Regression      0.3555         0.8057         0.5450     0.9111
+Random Forest            0.4577         0.8418         0.4759     0.9421
+XGBoost                  0.4611         0.8182         0.4808     0.9313
+
+ROC-AUC:
+                    Credit Card  German Credit  Heart Disease  Insurance
+Logistic Regression      0.6044         0.7493         0.7635     0.9433
+Random Forest            0.6497         0.8044         0.7647     0.9481
+XGBoost                  0.6515         0.7594         0.7515     0.9522
+
+Random Forest achieved the highest accuracy on three out of four datasets (Insurance: 0.9440, Credit Card: 0.8120, German Credit: 0.7650), while Logistic Regression performed best on the Heart Disease dataset (0.5574). XGBoost showed competitive performance but did not win on any dataset.
+
+F1 scores showed interesting patterns. Random Forest maintained strong F1 scores on Insurance (0.9421) and German Credit (0.8418). However, on the Credit Card dataset, all models showed relatively low F1 scores (0.3555-0.4611) despite reasonable accuracy, suggesting class imbalance issues.
+
+ROC-AUC scores were generally high across most datasets. The Insurance dataset showed the strongest discriminative ability with all three models achieving ROC-AUC above 0.94. The Heart Disease dataset showed unusual behavior where all models achieved similar ROC-AUC (around 0.76) despite large differences in accuracy scores.
+
+TABLE 2: Dataset Characteristics
+
+Dataset         Samples  Features  Best Model
+Heart Disease      303        13   Logistic Regression
+Credit Card      30000        23   Random Forest
+German Credit      999        24   Random Forest
+Insurance         1338         6   Random Forest
+
+Dataset characteristics reveal that Random Forest dominates on medium to large datasets (999+ samples), while the smallest dataset (Heart Disease with 303 samples) favored the simpler Logistic Regression model. The Insurance dataset with only 6 features but 1338 samples achieved the highest overall performance across all models.

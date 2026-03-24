@@ -1,0 +1,19 @@
+6. CONCLUSION
+
+This study compared three classical ML methods—Logistic Regression, Random Forest, and XGBoost—across four small-to-medium tabular datasets from healthcare and finance. The main takeaway is pretty clear: Random Forest wins most of the time (3 out of 4 datasets), but dataset size really matters.
+
+On datasets with 1,000+ samples, Random Forest consistently achieved the best accuracy. Insurance hit 94.4%, Credit Card got 81.2%, German Credit reached 76.5%. XGBoost was always close behind but never quite won. For medium-sized datasets, Random Forest seems like the safe default choice—it just works without much tuning.
+
+The surprise was Heart Disease (303 samples), where Logistic Regression beat both ensemble methods by a solid margin (55.7% vs 52.5% for Random Forest). This suggests a practical rule: if you're working with very small datasets (<500 samples), don't automatically reach for the fanciest model. Sometimes the simple linear approach actually does better, probably because it doesn't overfit.
+
+The other key lesson is about evaluation metrics. The Credit Card dataset looked fine by accuracy (81%) but had terrible F1 scores (0.36-0.46), revealing severe class imbalance that accuracy alone completely hid. Always check multiple metrics.
+
+For practitioners deciding which model to use: start with Logistic Regression on tiny datasets (<500 samples), switch to Random Forest for anything above 1,000 samples, and keep XGBoost in your back pocket if you have time to tune it. If you need interpretability for regulators or stakeholders, stick with Logistic Regression even if it costs you a few percentage points.
+
+Limitations: we only tested four datasets, all binary classification, no hyperparameter tuning, no feature engineering. The results might not hold for multi-class problems, regression tasks, or datasets from other domains. We also didn't compare against modern deep learning approaches designed for tabular data (TabNet, SAINT, etc.), which would be interesting future work.
+
+The unusually low performance on Heart Disease (best = 55.7%) bothers me a bit. Either this dataset is genuinely hard to predict, or we're missing important domain knowledge that would help. Worth investigating in future work.
+
+Next steps: test more datasets in the 200-800 sample range to pin down exactly where the transition happens. Try multi-class and regression problems. Add some modern deep learning baselines. Maybe most importantly—figure out if careful feature engineering could rescue the Heart Disease results.
+
+Code and data will be available on GitHub once we submit (need to clean up the notebooks first).

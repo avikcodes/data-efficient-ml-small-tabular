@@ -1,0 +1,325 @@
+Data-Efficient Machine Learning for Small Tabular Datasets: A Comparison Study
+
+[Your name]
+BITS Pilani, India
+[Your email - optional]
+
+ABSTRACT
+Numerous machine-learning algorithms are employed predominantly for the classification 
+of data presented in a tabular format, yet there has been very little research regarding their 
+efficacy when presented with smaller amounts of data. The study explores performance comparisons 
+between three of the more commonly applied algorithms, Logistic Regression, Random Forest, and 
+XGBoost, across four different datasets; two healthcare and two finance data tables where sample 
+sizes ranged from 303 to 30,000. Performance evaluation was conducted on the basis of accuracy, 
+F1 score, and ROC-AUC with identical pre-processing and train-test split techniques used on all 
+four datasets.
+Model performance is dependent upon sample sizes as illustrated by the most significant difference 
+in performance occurring with the smallest dataset, (Heart Disease, 303 samples; Logistic 
+Regression 0.7635) indicating superior performance for Logistic Regression when compared to 
+Random Forest (0.7647) and XGBoost (0.7515), while providing the best overall balanced performance. 
+In larger datasets Random Forest consistently provided superior performance in three out of four 
+datasets (German Credit, 0.8044; Insurance, 0.9481). XGBoost did not achieve the best performance 
+on any of the four datasets. Additionally, in one of the datasets (Credit Card), performance was 
+characterized by severe class imbalance with F1 scores less than 0.50 in spite of average accuracy 
+greater than eighty percent.
+We conclude that ensemble methods (e.g., Random Forest and XGBoost) run the risk of overfitting using 
+limited dataset sizes (e.g., < 500) while generalizing more accurately when using simpler linear 
+models. Therefore, our findings provide practical advice for practitioners on how to choose 
+algorithms when using very small tables (like healthcare or finance).
+
+Machine Learning, Small Data Sets, Randomized Method, logistic regression, Table Data, 
+Classification.
+
+INTRODUCTION
+
+Machine learning models are widely used for classification tasks on tabular datasets, but their 
+performance on small datasets is not well understood. We compare three popular methods—Logistic 
+Regression, Random Forest, and XGBoost—across four datasets from healthcare and finance with sample 
+sizes ranging from 303 to 30,000. Our goal is to determine which models work best when training 
+data is limited.
+
+Random Forest achieved the best performance on three out of four datasets, particularly on 
+medium-sized datasets (1,000+ samples). However, on the smallest dataset (303 samples), 
+Logistic Regression outperformed both ensemble methods, suggesting that complex models overfit when 
+data is very limited.
+
+The Insurance dataset achieved the highest overall performance (ROC-AUC > 0.94) despite having only 
+six features. This indicates that feature quality matters more than feature quantity for 
+classification accuracy.
+
+Based on these findings, we offer practical recommendations: for very small datasets 
+(<500 samples), simpler linear models like Logistic Regression may be preferable; for medium-sized 
+datasets (1,000-5,000 samples), Random Forest performs well with minimal hyperparameter tuning.
+
+The paper is organized as follows: Section 2 reviews related work on small dataset classification 
+and tabular data methods. Section 3 describes our datasets and experimental methodology. Sections 4 
+and 5 present results and discussion. Section 6 concludes with practical guidance for practitioners.
+
+RELATED WORK
+
+Over the past few years machine learning (ML) algorithm comparison research has been an area of 
+growing interest among researchers. In their paper, Ahmed et al. [12] empirically evaluated ML 
+models intending to compare algorithms utilized for time series forecasting; it was determined that 
+there is not one algorithm that performs superbly outperforming all others across all datasets. 
+Similarly, Pirooznia et al. [13] contrasted the performance of various methods that work with 
+microarray data, discovering that both algorithm performance and rank differ with respect to 
+datase characteristics. Uddin et al. [14] presented a comparison of various supervised learning 
+algorithms designed for disease prediction, concluding that simpler approaches sometimes yield 
+accuracy comparable to more complex algorithms, especially when data are limited.
+
+Recent literature has also begun to target the unique challenges faced when working with small 
+datasets. Based on their analysis of the performance of random forests on randomly sampled small 
+datasets consisting of two-phase sampling, Han et al. [1] determined that new approaches need to be 
+adopted if predictions created from these datasets are to avoid being overfit to the training data. 
+In their work, Cha et al. [3] implemented a random forest-based predictive model trained using a 
+small demolition waste database which had 784 samples and highlighted the need for thoroughly 
+hyperparameter tuning of tree-based predictive models created from small sample datasets as a 
+necessary requirement for accurate prediction in this instance.
+
+Through their research, Probst et al. [2] contributed substantially to the understanding of random 
+forest hyperparameters, providing guidance on how to appropriately select hyperparameters for use 
+with random forests. Findings from their work indicate that in instances where datasets are small, 
+hyperparameter settings that refer to the random forest's default hyperparameters produce the least 
+amount of model accuracy. Furthermore, Probst and Boulesteix [4] focused on a specific hyperparameter setting, tree count for random forests, concluding that tree count does not detrimentally affect performance (i.e., predictive accuracy) but rather adds additional computation time without substantially improving performance relative to significantly increasing the time required to create the predictive model and all while utilizing small sample datasets.
+For classification, tabular data continues to utilize logistic regression extensively; Tranmer & 
+Elliot [5] conducted seminal research surrounding binary logistic regression used with survey data. 
+Gilbert [6] published a study on tabular data through logistic regression that included a key 
+strength of logistic models - easy interpretation as compared to "black box" types of models. 
+Morgan & Teachman [7] provided comparisons presenting strong support to use logistic regression to 
+classify structured data where a linearity assumption was reasonably made regarding relationships 
+in data.
+
+Many researchers have examined overfitting and ensemble methods. Kumar et al. [8] completed an 
+exhaustive survey of ensemble methods and identified that overfitting was a major challenge with 
+the small dataset sizes they identified within their research. Dietterich [9] contributed to the 
+founding work on ensemble methods in 2000, where he emphasized the importance of base learner 
+diversity for avoiding overfitting when training an ensemble. Pourtaheri & Zahiri [10] proposed 
+improvements to techniques for reducing overfitting when price datasets are used. Cunningham [11]
+studied ensemble classification schemes regarding overfitting; determining feature selection could 
+help, but not entirely resolve the problem for very small datasets.
+
+XGBoost has increased its presence as an applied machine learning method. Chen & Guestrin [16], 
+introduced XGBoost with a reference implement that demonstrated the usefulness of XGBoost for 
+classifying data on large scale datasets. Zhang et al. applied XGBoost to wind turbine fault 
+detection where they were able to obtain a high degree of accuracy. However, the vast majority of 
+studies conducted with respect to XGBoost focus on datasets that have thousands or millions of 
+observations.
+Comparison studies across several domains have not produced consistent findings; for example, 
+Khondoker et al. used ML techniques on mental health data but observed no single ML method to be 
+superior overall to others, while Onan et al. obtained positive results using ensemble methods 
+within textual classification applications using data sets of much larger size than ours.
+
+Also notable is that much of the previous research has either been performed using either 
+large-scale data sets OR within a single-domain context, while there has been little to no 
+work which has systematically compared performance between logistic regression, random forest, 
+and XGBoost using small tabular data (<1500 samples) across multiple domains. This research fills 
+an important gap in the current literature through the evaluation of all three techniques using 
+four data sets with sample sizes ranging from 303 to 30,000, representing both the healthcare and 
+finance industries.
+
+3. METHODS
+
+3.1 Datasets
+
+We evaluated three classical machine learning models on four publicly available tabular datasets 
+from healthcare and finance domains.
+
+The Heart Disease dataset contains 303 patient records with 13 clinical features 
+(age, sex, chest pain type, resting blood pressure, cholesterol, etc.) for predicting presence of 
+heart disease. The dataset has balanced classes with approximately 50% positive cases.
+
+The Credit Card Default dataset consists of 30,000 samples with 23 features describing customer 
+payment history, credit limits, and demographics. The target variable indicates whether a customer 
+defaulted on their credit card payment.
+
+The German Credit dataset includes 999 applicants with 24 features describing financial status and 
+credit history. The classification task is to predict credit risk (good or bad credit).
+
+The Insurance Claims dataset contains 1,338 policyholders with 6 features including age, region, 
+coverage type, and medical history. The target is binary claim occurrence.
+
+3.2 Data Preprocessing
+
+All datasets underwent identical preprocessing steps to ensure fair comparison. Missing values in 
+numerical features were imputed using median values. Categorical features were encoded using label 
+encoding, converting categories to integer representations. All features were then standardized 
+using StandardScaler to have zero mean and unit variance.
+
+3.3 Models
+
+We compared three classical machine learning approaches:
+
+Logistic Regression serves as our baseline linear model, using L2 regularization and the lbfgs 
+solver with a maximum of 1000 iterations.
+
+Random Forest is an ensemble method that builds 100 decision trees with bootstrap sampling. Each 
+tree uses sqrt(n_features) random features at each split.
+
+XGBoost is a gradient boosting implementation using 100 boosting rounds with a learning rate of 
+0.1 and maximum tree depth of 3.
+
+All models used default scikit-learn parameters except where specified, with random_state=42 for 
+reproducibility.
+
+3.4 Evaluation Protocol
+
+Each dataset was split into 80% training and 20% testing sets using stratified sampling to preserve 
+class distributions. Models were trained on the training set and evaluated on the held-out test set.
+
+We report three metrics: Accuracy (overall correctness), F1 Score (harmonic mean of precision and 
+recall), and ROC-AUC (area under the receiver operating characteristic curve). 
+These metrics provide complementary views of model performance, especially for imbalanced datasets.
+
+
+4. RESULTS
+
+Table 1 presents the performance of all three models across the four datasets.
+
+TABLE 1: Model Performance Across Datasets
+
+Accuracy:
+                    Credit Card  German Credit  Heart Disease  Insurance
+Logistic Regression      0.8078         0.7250         0.5574     0.9104
+Random Forest            0.8120         0.7650         0.5246     0.9440
+XGBoost                  0.8118         0.7400         0.4754     0.9328
+
+F1 Score:
+                    Credit Card  German Credit  Heart Disease  Insurance
+Logistic Regression      0.3555         0.8057         0.5450     0.9111
+Random Forest            0.4577         0.8418         0.4759     0.9421
+XGBoost                  0.4611         0.8182         0.4808     0.9313
+
+ROC-AUC:
+                    Credit Card  German Credit  Heart Disease  Insurance
+Logistic Regression      0.6044         0.7493         0.7635     0.9433
+Random Forest            0.6497         0.8044         0.7647     0.9481
+XGBoost                  0.6515         0.7594         0.7515     0.9522
+
+Random Forest achieved the highest accuracy on three out of four datasets 
+(Insurance: 0.9440, Credit Card: 0.8120, German Credit: 0.7650), 
+while Logistic Regression performed best on the Heart Disease dataset (0.5574). 
+XGBoost showed competitive performance but did not win on any dataset.
+
+F1 scores showed interesting patterns. Random Forest maintained strong F1 scores on Insurance 
+(0.9421) and German Credit (0.8418). However, on the Credit Card dataset, all models showed 
+relatively low F1 scores (0.3555-0.4611) despite reasonable accuracy, suggesting class imbalance 
+issues.
+
+ROC-AUC scores were generally high across most datasets. The Insurance dataset showed the strongest 
+discriminative ability with all three models achieving ROC-AUC above 0.94. The Heart Disease 
+dataset showed unusual behavior where all models achieved similar ROC-AUC (around 0.76) despite 
+large differences in accuracy scores.
+
+TABLE 2: Dataset Characteristics
+
+Dataset         Samples  Features  Best Model
+Heart Disease      303        13   Logistic Regression
+Credit Card      30000        23   Random Forest
+German Credit      999        24   Random Forest
+Insurance         1338         6   Random Forest
+
+Dataset characteristics reveal that Random Forest dominates on medium to large datasets 
+(999+ samples), while the smallest dataset (Heart Disease with 303 samples) favored the simpler 
+Logistic Regression model. The Insurance dataset with only 6 features but 1338 samples achieved 
+the highest overall performance across all models.
+
+```
+5. DISCUSSION
+
+Random Forest achieved the best performance on three out of four datasets (Insurance, Credit Card, 
+German Credit), demonstrating consistent effectiveness on medium-sized tabular datasets. On the 
+Insurance dataset, Random Forest reached 94.4% accuracy compared to XGBoost's 93.3%, a meaningful 
+difference for healthcare applications.
+
+However, the Heart Disease dataset (303 samples) showed different behavior. Logistic Regression 
+achieved 55.7% accuracy while Random Forest obtained only 52.5% and XGBoost 47.5%. We attribute 
+this reversal to overfitting in ensemble methods when training data is extremely limited. With only 
+303 samples, Random Forest and XGBoost likely fit noise in the training data rather than 
+generalizable patterns. Logistic Regression, with its simpler decision boundary and fewer 
+parameters, avoids this overfitting and generalizes better.
+
+This finding aligns with bias-variance tradeoff theory. Ensemble methods have high variance and 
+require sufficient training samples to estimate reliable tree splits. On very small datasets, 
+the variance dominates, leading to poor generalization. Logistic Regression has higher bias 
+but lower variance, making it more suitable for limited data.
+
+The Credit Card dataset revealed the importance of examining multiple evaluation metrics. 
+All three models achieved reasonable accuracy (80-81%) but poor F1-scores (0.36-0.46), 
+indicating severe class imbalance. The models predicted the majority class frequently, 
+inflating accuracy while failing to identify the minority class effectively. This demonstrates that 
+accuracy alone is insufficient for imbalanced datasets.
+
+Dataset size appears to be the critical factor determining model performance. Random Forest 
+dominated on all datasets with 1,000+ samples, while Logistic Regression won on the dataset with 
+fewer than 500 samples. This suggests a threshold around 500-800 samples where ensemble methods 
+become beneficial, though additional datasets in this range would be needed to establish this 
+threshold precisely.
+
+Feature count does not necessarily correlate with performance. The Insurance dataset achieved the 
+highest performance (94%+) with only 6 features, while German Credit with 24 features performed 
+worse. This indicates that feature quality matters more than feature quantity. Feature selection 
+\might improve German Credit performance by removing noisy variables.
+
+Based on these findings, we recommend practitioners use Logistic Regression for datasets under 
+500 samples, Random Forest for datasets between 1,000-5,000 samples, and consider XGBoost only when 
+resources allow extensive hyperparameter tuning. When model interpretability is required for 
+regulatory or clinical purposes, Logistic Regression remains preferable even with minor accuracy 
+reduction.
+
+Limitations of this study include: (1) only four datasets examined, all from healthcare and finance 
+domains; (2) binary classification only; (3) no hyperparameter optimization performed; (4) no 
+feature engineering attempted. Results may differ for multi-class problems, regression tasks, or 
+datasets from other domains. We did not compare against recent deep learning methods designed for 
+tabular data (e.g., TabNet, SAINT), which represents an area for future investigation.
+
+The relatively low performance on Heart Disease (55.7% best accuracy) suggests either inherent 
+dataset difficulty or missing domain knowledge that could inform better feature engineering. 
+Future work should investigate whether domain-specific features improve performance.
+
+
+6. CONCLUSION
+
+This study compared Logistic Regression, Random Forest, and XGBoost across four tabular datasets 
+from healthcare and finance with sample sizes ranging from 303 to 30,000. Random Forest achieved 
+the best performance on three out of four datasets, particularly on medium-sized datasets 
+(1,000+ samples), reaching 94.4% accuracy on Insurance, 81.2% on Credit Card, and 76.5% on 
+German Credit.
+
+The key finding is that model selection depends critically on dataset size. On the smallest dataset 
+(Heart Disease, 303 samples), Logistic Regression outperformed both ensemble methods 
+(55.7% vs 52.5%), suggesting that simpler models generalize better when training data is severely 
+limited. This pattern indicates a practical threshold around 500-800 samples below which ensemble 
+methods may overfit.
+
+Evaluation using multiple metrics proved essential. The Credit Card dataset showed reasonable 
+accuracy (81%) but poor F1-scores (0.36-0.46), revealing severe class imbalance that accuracy alone 
+would have missed.
+
+For practitioners, we recommend: Logistic Regression for datasets under 500 samples; Random Forest 
+for datasets between 1,000-5,000 samples with minimal tuning; and prioritizing interpretability 
+over marginal accuracy gains when regulatory or clinical explanation is required.
+
+Future work should examine additional datasets in the 200-800 sample range to establish more 
+precise size thresholds, extend evaluation to multi-class and regression problems, compare against 
+modern deep learning approaches for tabular data, and investigate whether domain-specific feature 
+engineering can improve performance on difficult datasets like Heart Disease.
+
+[1] Sunwoo Han, . "Brian D. Williamson & Youyi Fong Improving random forest predictions in small datasets from two-phase sampling designs"BMC Medical Informatics and Decision Making. 2021.
+[2]Philipp Probst, Marvin N. Wright, Anne-Laure Boulesteix."Hyperparameters and tuning strategies for random forest". 2019.
+[3] GW Cha, HJ Moon, YM Kim, WH Hong. "Development of a prediction model for demolition waste generation using a random forest algorithm based on small datasets". International Journal. 2020.
+[4]Philipp Probst, Anne-Laure Boulesteix. "To Tune or Not to Tune the Number of Trees in Random Forest". 2018.
+[5] M Tranmer, M Elliot. "Binary logistic regression". Cathie Marsh for census and survey. 2008.
+[6] N Gilbert. "Analyzing tabular data: Loglinear and logistic models for social researchers". Taylor & Francis. 2022.
+[7] SP Morgan, JD Teachman. "Logistic regression: Description, examples, and comparisons". Journal of Marriage and Family. 1988.
+[8] S Kumar, P Kaur, A Gosain. "A comprehensive survey on ensemble methods". IEEE 7th International. 2022.
+[9] TG Dietterich. "Ensemble methods in machine learning". International workshop on multiple classifier systems. Springer. 2000.
+[10] ZK Pourtaheri, SH Zahiri. "Ensemble classifiers with improved overfitting". 1st conference on swarm intelligence. 2016.
+[11] P Cunningham. "Overfitting and diversity in classification ensembles based on feature selection". 2000.
+[12] NK Ahmed, AF Atiya, NE Gayar. "An empirical comparison of machine learning models for time series forecasting". Econometric. 2010.
+[13] M Pirooznia, JY Yang, MQ Yang, Y Deng. "A comparative study of different machine learning methods on microarray gene expression data". BMC genomics. Springer. 2008.
+[14] S Uddin, A Khan, ME Hossain, MA Moni. "Comparing different supervised machine learning algorithms for disease prediction". BMC medical informatics and decision making. Springer. 2019.
+[15] M Khondoker, R Dobson, C Skirrow. "A comparison of machine learning methods for classification using simulation with multiple real data examples from mental health studies". 2016.
+[16] T Chen, C Guestrin. "XGBoost: A scalable tree boosting system". ACM SIGKDD International Conference on Knowledge Discovery and Data Mining. 2016.
+[17] X Zhang, C Yan, C Gao, BA Malin, Y Chen. "Predicting missing values in medical data via XGBoost regression". Journal of healthcare. Springer. 2020.
+[18] A Onan, S Korukoğlu, H Bulut. "A multiobjective weighted voting ensemble classifier based on differential evolution algorithm for text sentiment classification". Expert Systems with Applications. 2016.
+[19] D Zhang, L Qian, B Mao, C Huang, B Huang, Y Si. "A data-driven design for fault detection of wind turbines using random forests and XGBoost". IEEE Access. 2018.

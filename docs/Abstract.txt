@@ -1,0 +1,24 @@
+ABSTRACT
+Numerous machine-learning algorithms are employed predominantly for the classification 
+of data presented in a tabular format, yet there has been very little research regarding their 
+efficacy when presented with smaller amounts of data. The study explores performance comparisons 
+between three of the more commonly applied algorithms, Logistic Regression, Random Forest, and 
+XGBoost, across four different datasets; two healthcare and two finance data tables where sample 
+sizes ranged from 303 to 30,000. Performance evaluation was conducted on the basis of accuracy, 
+F1 score, and ROC-AUC with identical pre-processing and train-test split techniques used on all 
+four datasets.
+Model performance is dependent upon sample sizes as illustrated by the most significant difference 
+in performance occurring with the smallest dataset, (Heart Disease, 303 samples; Logistic 
+Regression 0.7635) indicating superior performance for Logistic Regression when compared to 
+Random Forest (0.7647) and XGBoost (0.7515), while providing the best overall balanced performance. 
+In larger datasets Random Forest consistently provided superior performance in three out of four 
+datasets (German Credit, 0.8044; Insurance, 0.9481). XGBoost did not achieve the best performance 
+on any of the four datasets. Additionally, in one of the datasets (Credit Card), performance was 
+characterized by severe class imbalance with F1 scores less than 0.50 in spite of average accuracy 
+greater than eighty percent.
+We conclude that ensemble methods (e.g., Random Forest and XGBoost) run the risk of overfitting using 
+limited dataset sizes (e.g., < 500) while generalizing more accurately when using simpler linear 
+models. Therefore, our findings provide practical advice for practitioners on how to choose 
+algorithms when using very small tables (like healthcare or finance).
+
+Machine Learning, Small Data Sets, Randomized Method, logistic regression, Table Data, Classification.

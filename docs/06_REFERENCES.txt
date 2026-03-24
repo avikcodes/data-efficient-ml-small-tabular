@@ -1,0 +1,19 @@
+[1] Sunwoo Han, . "Brian D. Williamson & Youyi Fong Improving random forest predictions in small datasets from two-phase sampling designs"BMC Medical Informatics and Decision Making. 2021.
+[2]Philipp Probst, Marvin N. Wright, Anne-Laure Boulesteix."Hyperparameters and tuning strategies for random forest". 2019.
+[3] GW Cha, HJ Moon, YM Kim, WH Hong. "Development of a prediction model for demolition waste generation using a random forest algorithm based on small datasets". International Journal. 2020.
+[4]Philipp Probst, Anne-Laure Boulesteix. "To Tune or Not to Tune the Number of Trees in Random Forest". 2018.
+[5] M Tranmer, M Elliot. "Binary logistic regression". Cathie Marsh for census and survey. 2008.
+[6] N Gilbert. "Analyzing tabular data: Loglinear and logistic models for social researchers". Taylor & Francis. 2022.
+[7] SP Morgan, JD Teachman. "Logistic regression: Description, examples, and comparisons". Journal of Marriage and Family. 1988.
+[8] S Kumar, P Kaur, A Gosain. "A comprehensive survey on ensemble methods". IEEE 7th International. 2022.
+[9] TG Dietterich. "Ensemble methods in machine learning". International workshop on multiple classifier systems. Springer. 2000.
+[10] ZK Pourtaheri, SH Zahiri. "Ensemble classifiers with improved overfitting". 1st conference on swarm intelligence. 2016.
+[11] P Cunningham. "Overfitting and diversity in classification ensembles based on feature selection". 2000.
+[12] NK Ahmed, AF Atiya, NE Gayar. "An empirical comparison of machine learning models for time series forecasting". Econometric. 2010.
+[13] M Pirooznia, JY Yang, MQ Yang, Y Deng. "A comparative study of different machine learning methods on microarray gene expression data". BMC genomics. Springer. 2008.
+[14] S Uddin, A Khan, ME Hossain, MA Moni. "Comparing different supervised machine learning algorithms for disease prediction". BMC medical informatics and decision making. Springer. 2019.
+[15] M Khondoker, R Dobson, C Skirrow. "A comparison of machine learning methods for classification using simulation with multiple real data examples from mental health studies". 2016.
+[16] T Chen, C Guestrin. "XGBoost: A scalable tree boosting system". ACM SIGKDD International Conference on Knowledge Discovery and Data Mining. 2016.
+[17] X Zhang, C Yan, C Gao, BA Malin, Y Chen. "Predicting missing values in medical data via XGBoost regression". Journal of healthcare. Springer. 2020.
+[18] A Onan, S Korukoğlu, H Bulut. "A multiobjective weighted voting ensemble classifier based on differential evolution algorithm for text sentiment classification". Expert Systems with Applications. 2016.
+[19] D Zhang, L Qian, B Mao, C Huang, B Huang, Y Si. "A data-driven design for fault detection of wind turbines using random forests and XGBoost". IEEE Access. 2018.

@@ -1,0 +1,59 @@
+
+```
+PAPER OUTLINE: ata-efficient ML for Small Tabular Datasets: 
+   A Comparison on 3 Healthcare and Finance Datasets
+
+1. INTRODUCTION (~500 words)
+   - Problem: Many real-world datasets are small (<1000 samples)
+   - Challenge: Deep learning needs big data, but healthcare/finance often has small data
+   - Our contribution: Systematic comparison of classical ML on 4 small tabular datasets
+   - Key finding: Random Forest achieved highest accuracy on 2/3 datasets (Insurance: 0.9440, Credit
+     Card: 0.8120,). Logistic Regression won on Heart Disease (0.5574). 
+     Random Forest shows most consistent performance across diverse domains.
+
+2. RELATED WORK (~300 words)
+   - Small data learning methods
+   - Tabular data vs image/text data
+   - Classical ML vs deep learning for small datasets
+   [Need 5-7 citations here - find tomorrow]
+
+3. METHODS (~600 words)
+   3.1 Datasets
+       - Heart Disease: 303 samples, [13] features, binary classification
+       - Credit Card: 30000 samples, 23 features, binary classification
+       - German Credit: 999 samples, 0 featurese, binary classification
+       - Insurance: 1338 samples, 6 features, binary classification
+       - Missing value handling: median imputation
+       - Categorical encoding: label encoding
+       - Feature scaling: StandardScaler
+   3.3 Models
+       - Logistic Regression: baseline linear model
+       - Random Forest: ensemble method, 100 trees
+       - XGBoost: gradient boosting
+   3.4 Evaluation
+       - 80/20 train-test split
+       - Metrics: Accuracy, F1, ROC-AUC
+       - Random seed: 42 for reproducibility
+
+4. RESULTS (~400 words)
+- Key findings:
+  * Random Forest wins on 3/4 datasets (0.9440, 0.8120, 0.7650)
+  * Logistic Regression best on Heart Disease only (0.5574)
+  * Insurance dataset shows highest overall performance (all models >0.91)
+  * Heart Disease shows lowest performance and unusual pattern (linear model beats ensembles)
+
+5. DISCUSSION (~400 words)
+   - Why these results make sense
+   - When to use which model
+   - Limitations: only 4 datasets, only binary classification
+   - Practical recommendations
+
+6. CONCLUSION (~200 words)
+   - Summary of findings
+   - Contribution: practical guide for small tabular data
+   - Future work: extend to multi-class, regression
+
+Total: ~2400 words (perfect for short paper)
+```
+
+---

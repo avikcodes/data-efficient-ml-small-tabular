@@ -1,0 +1,13 @@
+Model,Accuracy,F1 Score,ROC-AUC,Dataset
+Logistic Regression,0.5574,0.545,0.7635,Heart Disease
+Random Forest,0.5246,0.4759,0.7647,Heart Disease
+XGBoost,0.4754,0.4808,0.7515,Heart Disease
+Logistic Regression,0.8078,0.3555,0.6044,Credit Card
+Random Forest,0.812,0.4577,0.6497,Credit Card
+XGBoost,0.8118,0.4611,0.6515,Credit Card
+Logistic Regression,0.725,0.8057,0.7493,German Credit
+Random Forest,0.765,0.8418,0.8044,German Credit
+XGBoost,0.74,0.8182,0.7594,German Credit
+Logistic Regression,0.9104,0.9111,0.9433,Insurance
+Random Forest,0.944,0.9421,0.9481,Insurance
+XGBoost,0.9328,0.9313,0.9522,Insurance

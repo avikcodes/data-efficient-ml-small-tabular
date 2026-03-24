@@ -1,0 +1,4 @@
+Model,Credit Card,German Credit,Heart Disease,Insurance
+Logistic Regression,0.8078,0.725,0.5574,0.9104
+Random Forest,0.812,0.765,0.5246,0.944
+XGBoost,0.8118,0.74,0.4754,0.9328

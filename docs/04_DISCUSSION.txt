@@ -1,0 +1,28 @@
+```
+5. DISCUSSION
+
+The most striking result from our experiments is how consistently Random Forest won across different dataset sizes - it took top accuracy on Insurance, Credit Card, and German Credit. This wasn't a small margin either; on Insurance it hit 94.4% while XGBoost only managed 93.3%. That's a decent gap for a healthcare application where you'd actually deploy this.
+
+But here's where it gets interesting: Heart Disease completely broke the pattern. Logistic Regression won with 55.7% accuracy while Random Forest only got 52.5% and XGBoost did even worse at 47.5%. At first I thought this was a bug in my code, but after checking three times, it's real. The dataset only has 303 samples - that's genuinely tiny for machine learning. I think what's happening is the ensemble methods are overfitting. They're finding patterns in the training noise that don't generalize. The simpler logistic model, precisely because it can't fit complex patterns, ends up doing better.
+
+This actually makes sense if you think about the bias-variance tradeoff. With 303 samples, you just don't have enough data to reliably estimate all those tree splits in Random Forest. The model has high variance. Logistic Regression has higher bias but much lower variance, so it wins on small data.
+
+The Credit Card results revealed something else important that I initially missed. All three models got decent accuracy (80-81%) but absolutely terrible F1 scores (0.36-0.46). That's a huge red flag. Looking back at the data, it's clearly imbalanced - probably like 80% non-default, 20% default. So the models are just predicting "no default" most of the time and getting high accuracy by accident. This is exactly why you need multiple metrics. If I'd only looked at accuracy, I would've thought Credit Card was a success.
+
+Dataset size seems to be the critical factor here. Random Forest dominated everything above 1,000 samples. Below 500 samples (just Heart Disease in our case), it lost to logistic regression. There's probably a threshold somewhere around 500-800 samples where Random Forest becomes worth it, but we'd need more datasets in that range to pin it down.
+
+Feature count is interesting too. Insurance only had 6 features but achieved the best performance overall (94%+ across all metrics). German Credit had 24 features and did worse. More features isn't always better - you might just be adding noise. Though to be fair, we didn't do any feature selection, so German Credit might improve if we dropped the useless ones.
+
+For practitioners, here's what I'd actually recommend based on these results:
+- If you have <500 samples: just use logistic regression, seriously. Don't overcomplicate it.
+- 500-5000 samples: Random Forest with default settings. It'll probably work fine.
+- If you care about interpretability (e.g., need to explain to doctors or regulators): stick with logistic regression even if you lose 2-3% accuracy.
+- Always check F1 and ROC-AUC, not just accuracy. We would've completely missed the Credit Card imbalance issue otherwise.
+
+There are obvious limitations here. We only tested four datasets, all binary classification, all from healthcare/finance. Maybe Random Forest would lose on text features, or time series, or whatever. We also didn't tune hyperparameters at all - just used sklearn defaults. In a real project you'd do a grid search, but the point was to test out-of-the-box performance.
+
+The Heart Disease accuracy (55%) is honestly pretty bad. Either the dataset is just hard, or there's important domain knowledge we're missing. Maybe you need to engineer features like "age × cholesterol" or something. We didn't try any of that.
+
+I also didn't test neural networks, which some recent papers claim can work on small tabular data with the right tricks (heavy dropout, batch norm, pre-training, etc.). Would be worth comparing, though I'm skeptical they'd beat Random Forest here.
+
+Future work: need more datasets in the 200-800 sample range to nail down exactly when Random Forest starts winning. Would also be good to test multi-class problems and regression. And someone should really figure out what's going on with Heart Disease - is 55% the best anyone can do, or are we missing something obvious?
